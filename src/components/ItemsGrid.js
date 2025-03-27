@@ -20,6 +20,10 @@ export function ItemsGrid() {
     });
   };
 
+  const handleCardClick = (character) => {
+    return () => cardOnClickHandler(character);
+  };
+
   if (!characters.length) {
     return null;
   }
@@ -29,7 +33,7 @@ export function ItemsGrid() {
       {characters.map((character) => (
         <Card
           key={character.id}
-          onClickHandler={cardOnClickHandler(character)}
+          onClickHandler={handleCardClick(character)}
           {...character}
         />
       ))}
