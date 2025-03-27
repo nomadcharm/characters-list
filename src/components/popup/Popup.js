@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
@@ -16,20 +17,50 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     episode: episodes
   } = content;
 
-  function togglePopup(e) {
-    if (e.currentTarget !== e.target) {
-      return;
-    }
+  const popupRef = useRef(null);
 
+  const togglePopup = useCallback(() => {
     setSettings((prevState) => ({
       ...prevState,
       visible: !prevState.visible
     }));
-  }
+  }, [setSettings]);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (visible && popupRef.current && !popupRef.current.contains(e.target)) {
+        togglePopup();
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        togglePopup();
+      }
+    });
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleClickOutside);
+    };
+  }, [visible, popupRef, togglePopup]);
+
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [visible]);
 
   return (
     <PopupContainer visible={visible}>
-      <StyledPopup>
+      <StyledPopup ref={popupRef}>
         <CloseIcon onClick={togglePopup} />
 
         <PopupHeader
