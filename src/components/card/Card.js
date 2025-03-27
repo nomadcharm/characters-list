@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { CardTitle } from './CardTitle';
 import { CardStatus } from './CardStatus';
 
-// TODO: Refactor the Card component
 export function Card({
   status,
   name,
@@ -18,7 +17,6 @@ export function Card({
 
       <CardInfo>
         <CardTitle name={name} gender={gender} />
-
         <CardStatus status={status} species={species} type={type} />
       </CardInfo>
     </StyledCard>
