@@ -11,6 +11,8 @@ export function PopupEpisodes({ episodes }) {
 
   useEffect(() => {
     if (!episodes?.length) {
+      setIsFetching(false);
+
       return;
     }
 
@@ -27,6 +29,7 @@ export function PopupEpisodes({ episodes }) {
           setSeries(data);
         }
       });
+    setIsFetching(false);
   }, [episodes]);
 
   if (isFetching) {
