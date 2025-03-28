@@ -17,19 +17,19 @@ export function Pagination() {
     setPages(createdPages);
   }, [apiURL, info]);
 
-  const handleFirstPageClick = function () {
+  const handleFirstPageClick = () => {
     navigateToPage(0);
   };
 
-  const handlePreviousPageClick = function () {
+  const handlePreviousPageClick = () => {
     navigateToPage(activePage - 2);
   };
 
-  const handleNextPageClick = function () {
+  const handleNextPageClick = () => {
     navigateToPage(activePage);
   };
 
-  const handleLastPageClick = function () {
+  const handleLastPageClick = () => {
     navigateToPage(pages.length - 1);
   };
 
