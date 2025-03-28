@@ -11,7 +11,7 @@ import {
 const API_URL = 'https://rickandmortyapi.com/api/character/';
 
 export function DataProvider({ children }) {
-  const [activePage, setActivePage] = useState(0);
+  const [activePage, setActivePage] = useState(1);
   const [characters, setCharacters] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [isError, setIsError] = useState(false);

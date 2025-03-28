@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Pagination, ItemsGrid, useData, Header, AppState } from './components';
+import { Pagination } from './components/pagination/Pagination';
+import { ItemsGrid, useData, Header, AppState } from './components';
 
 export function App() {
   const { isFetching, isError } = useData();
@@ -7,13 +8,11 @@ export function App() {
   return (
     <Main>
       <Header />
-
       <AppState />
 
       {!isFetching && !isError && (
         <>
           <ItemsGrid />
-
           <Pagination />
         </>
       )}
