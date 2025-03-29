@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useData } from '../providers';
+import { useCharacterFilters } from '../providers/FilterProvider';
 
 export function Pagination() {
   const [pages, setPages] = useState([]);
   const { apiURL, info, activePage, setActivePage, setApiURL } = useData();
+  const { filteredCharacters, filteredPages } = useCharacterFilters();
+
+  const isFiltered = filteredCharacters.length > 0;
 
   useEffect(() => {
-    const createdPages = Array.from({ length: info.pages }, (_, i) => {
+    let totalPages = isFiltered ? filteredPages.pages || 0 : info.pages;
+
+    const createdPages = Array.from({ length: totalPages }, (_, i) => {
       const URLWithPage = new URL(apiURL);
       URLWithPage.searchParams.set('page', i + 1);
 
@@ -15,7 +21,7 @@ export function Pagination() {
     });
 
     setPages(createdPages);
-  }, [apiURL, info]);
+  }, [apiURL, filteredPages, info, isFiltered]);
 
   const handleFirstPageClick = () => {
     navigateToPage(0);

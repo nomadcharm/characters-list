@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Popup } from './popup';
 import { useData } from './providers';
 import { Card } from './card';
+import { useCharacterFilters } from './providers/FilterProvider';
 
 const defaultPopupSettings = {
   visible: false,
@@ -11,7 +12,9 @@ const defaultPopupSettings = {
 
 export function ItemsGrid() {
   const { characters } = useData();
+  const { filteredCharacters } = useCharacterFilters();
   const [popupSettings, setPopupSettings] = useState(defaultPopupSettings);
+  const isFiltered = filteredCharacters.length > 0;
 
   const cardOnClickHandler = (character) => {
     setPopupSettings({
@@ -30,7 +33,7 @@ export function ItemsGrid() {
 
   return (
     <Container>
-      {characters.map((character) => (
+      {(isFiltered ? filteredCharacters : characters).map((character) => (
         <Card
           key={character.id}
           onClickHandler={handleCardClick(character)}
