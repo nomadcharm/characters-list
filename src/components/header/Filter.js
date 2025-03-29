@@ -104,10 +104,16 @@ const FilterContainer = styled.div`
   gap: 10px;
   max-width: 560px;
   flex-wrap: wrap;
+
+  @media (max-width: 680px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 240px;
+  }
 `;
 
 const StyledInput = styled.input`
-  width: 180px;
+  max-width: 180px;
   height: 40px;
   padding: 12px;
   outline: none;
@@ -131,6 +137,11 @@ const StyledInput = styled.input`
   &:focus {
     background-color: #334466;
   }
+
+  @media (max-width: 680px) {
+    max-width: 100%;
+    width: 100%;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -138,6 +149,11 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  @media (max-width: 680px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 const ApplyButton = styled.button`
@@ -156,6 +172,10 @@ const ApplyButton = styled.button`
     color: #ffffff;
     background-color: #83bf46;
   }
+
+  @media (max-width: 680px) {
+    width: 100%;
+  }
 `;
 
 const ResetButton = styled.button`
@@ -173,6 +193,10 @@ const ResetButton = styled.button`
   &:hover {
     color: #ffffff;
     background-color: #ff5152;
+  }
+
+  @media (max-width: 680px) {
+    width: 100%;
   }
 `;
 
@@ -193,6 +217,9 @@ const customStyles = {
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: '#334466'
+    },
+    '@media (max-width: 680px)': {
+      width: '240px'
     }
   }),
   menu: (provided) => ({
